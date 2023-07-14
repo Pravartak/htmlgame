@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="wardrobestyle.css" type="text/css" media="all" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('Assets/Background.jpg');
+            background-size: 102% 102%;
+            background-repeat: no-repeat;
+            overflow: hidden;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        .start {
+            /*This is for start button... Please check classes and Id(s) before editing*/
+            position: absolute;
+            bottom: 6%;
+            /*Please edit these only if you want*/
+            right: 3%;
+            /*to change position of this button*/
+            width: 11em;
+            height: 4em;
+            outline: none;
+            transition: 0.1s;
+            background-color: transparent;
+            border: none;
+            font-size: 13px;
+            font-weight: bold;
+            color: #87FFB4;
+            text-align: center;
+        }
+
+        .cancel {
+            position: absolute;
+            top: -70px;
+            left: 40%;
+            width: 11em;
+            height: 5em;
+            outline: none;
+            transition: .1s;
+            background-color: transparent;
+            border: none;
+            font-size: 13px;
+            font-weight: bold;
+            color: #FF0000;
+        }
+
+        /*This is timer cancel button. Change only basic properties.*/
+
+        #startclip {
+            --color: #2761c3;
+            position: absolute;
+            top: 0;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            border: 5px double var(--color);
+            box-shadow: inset 0px 0px 15px #195480;
+            -webkit-clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+        }
+
+        #case {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            transition: .1s;
+        }
+
+        #topPart {
+            position: absolute;
+            top: 0;
+            height: 50%;
+            width: 100%;
+            background-color: #FFB900;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            transition-delay: .5s;
+            transition: .5s ease;
+        }
+        #bottomPart {
+            position: absolute;
+            bottom: 0;
+            height: 50%;
+            width: 100%;
+            background-color: #FFB900;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            transition-delay: .5s;
+            transition: .5s ease;
+        }
+
+        .arrow {
+            position: absolute;
+            transition: 0.2s;
+            background-color: #2761c3;
+            top: 35%;
+            width: 11%;
+            height: 30%;
+        }
+
+        .corner {
+            position: absolute;
+            width: 4em;
+            height: 4em;
+            background-color: #2761c3;
+            box-shadow: inset 1px 1px 8px #2781c3;
+            transform: scale(1) rotate(45deg);
+            transition: 0.2s;
+        }
+
+        #rightTop {
+            top: -1.98em;
+            left: 91%;
+        }
+
+        #leftTop {
+            top: -1.96em;
+            left: -3.0em;
+        }
+
+        #leftBottom {
+            top: 2.10em;
+            left: -2.15em;
+        }
+
+        #rightBottom {
+            top: 45%;
+            left: 88%;
+        }
+
+        .start:hover #leftTop {
+            animation: 0.1s ease-in-out 0.05s both changeColor8,
+            0.2s linear 0.4s both lightEffect8;
+        }
+
+        .start:hover #rightTop {
+            animation: 0.1s ease-in-out 0.15s both changeColor8,
+            0.2s linear 0.4s both lightEffect8;
+        }
+
+        .start:hover #rightBottom {
+            animation: 0.1s ease-in-out 0.25s both changeColor8,
+            0.2s linear 0.4s both lightEffect8;
+        }
+
+        .start:hover #leftBottom {
+            animation: 0.1s ease-in-out 0.35s both changeColor8,
+            0.2s linear 0.4s both lightEffect8;
+        }
+
+        .start:hover .corner {
+            transform: scale(1.25) rotate(45deg);
+        }
+
+        .start:hover #startclip {
+            animation: 0.2s ease-in-out 0.55s both greenLight8;
+            --color: #27c39f;
+        }
+
+@keyframes changeColor8 {
+            from {
+                background-color: #2781c3;
+            }
+
+            to {
+                background-color: #27c39f;
+            }
+        }
+
+@keyframes lightEffect8 {
+            from {
+                box-shadow: 1px 1px 5px #27c39f;
+            }
+
+            to {
+                box-shadow: 0 0 2px #27c39f;
+            }
+        }
+
+@keyframes greenLight8 {
+            from {}
+
+            to {
+                box-shadow: inset 0px 0px 32px #27c39f;
+            }
+        }
+
+        .container {
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        #profile-section .profile-picture {
+            float: left;
+            vertical-align: top;
+            width: 60px;
+            /* Adjust the width to your desired size */
+            height: 50px;
+            /* Adjust the height to your desired size */
+            border-radius: 3px;
+            border: 3px solid grey;
+        }
+
+        h3 {
+            text-align: left;
+            color: aliceblue;
+        }
+
+        .name1 {
+            float: left;
+            vertical-align: top;
+            width: 210px;
+            /* Adjust the width to your desired size */
+            height: 70px;
+            /* Adjust the height to your desired size */
+            border-radius: 3px;
+            border: 3px solid grey;
+
+        }
+
+        #options {
+            position: absolute;
+            top: 15%;
+            left: 1%;
+            margin-top: 10px;
+        }
+        #bioInput {
+            border: none;
+            /* Remove the border */
+            background-color: gray;
+            /* Set the background color to gray */
+            padding: 5px;
+            /* Add some padding for better visibility */
+            color: white;
+            /* Set the text color to white */
+            font-size: 14px;
+            /* Adjust the font size as needed */
+        }
+
+        #options button {
+            height: 38px;
+            width: 96px;
+            margin-bottom: 6px;
+            background-color: rgba(130, 10, 150, 0.8);
+            /*Set this color some shiny type... as you like OFCOURSE!*/
+            background-color:;
+            color: #fff;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #options button:hover {
+            background-color: rgba(88, 88, 88, 0.8);
+        }
+
+        /*PROFILE POPUP VIEW */
+        .Profile {
+            position: absolute;
+            top: 5%;
+            left: -60%;
+            padding: 10px;
+            height: 320px;
+            width: 450px;
+            background-color: Black;
+            border: 2px solid Gray;
+            border-radius: 10px;
+            transition: .2s ease;
+        }
+        .profile-head {
+            padding: 10px;
+            height: 100px;
+            text-align: center;
+            border-bottom: 1px solid White;
+        }
+        #profile-image {
+            position: absolute;
+            left: 20px;
+            padding: 0px;
+            height: 90px;
+            object-fit: cover;
+            border: 2px solid #424241;
+            border-radius: 10px;
+        }
+        h2, b {
+            position: absolute;
+            right: 30px;
+            color: White;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0px;
+            font-weight: bold;
+            color: #00ACFF;
+        }
+        .profile-progress {
+            margin-top: 0px;
+        }
+        .progress-bar {
+            height: 10px;
+            background-color: #f2f2f2;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background-color: #f3f3f3;
+            transition: width 0.13s ease-in-out;
+        }
+        .progress-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: -20px;
+        }
+        .progress-labels .label {
+            font-size: 10px;
+            color: #999;
+        }
+        .player-bio {
+            margin-top: 13px;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        .player-bio textarea {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        .player-bio button {
+            padding: 15px 15px;
+            background-color: rgba(41, 41, 41, 0.8);
+            color: #fff;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        #loader {
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #loader:after {
+            content: "";
+            border: 2px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 2px solid #FF0000;
+            border-bottom: 2px solid #001AFF;
+            border-left: 2px solid #FF0000;
+            border-right: 2px solid #001AFF;
+            width: 120px;
+            height: 120px;
+            animation: spin 1s linear infinite;
+        }
+        #fullscreen_landscape {
+            position: absolute;
+            top: 55%;
+            height: 50px;
+            width: 100px;
+            background-color: #2761c3;
+
+            border-radius: 30%;
+        }
+        .dialog {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 100px;
+            width: 300px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        .buttons {
+            position: fixed;
+            bottom: 30%;
+        }
+        .buttons #cancel-main {
+            position: fixed;
+            left: 10%;
+            height: 30px;
+            width: 70px;
+            border: 2px solid #757575;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 10px;
+        }
+        .buttons #exit-submain {
+            position: fixed;
+            right: 10%;
+            height: 30px;
+            width: 70px;
+            border: 2px solid #757575;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 10px;
+        }
+        .dialog h2 {
+            position: fixed;
+            left: 10%;
+            margin-top: 0;
+            color: Red;
+        }
+        .dialog p {
+            position: fixed;
+            left: 15%;
+            top: 25%;
+        }
+
+@keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Hide scrollbar while loading */
+        body {
+            overflow: hidden;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="loader">
+        <button id="fullscreen_landscape" onclick="fullscreen()">Start Game</button>
+    </div>
+    <div id="content" style="display: none;">
+        <div id="container">
+
+            <div id="options">
+                <button onclick="openWardrobe()" id="optionbtn">Wardrobe</button> <br>
+                <button onclick="openLuckRoyale()" id="optionbtn">Luck Royale</button> <br>
+                <button onclick="openWeapon()" id="optionbtn">Weapon</button> <br>
+                <button onclick="openCharacter()" id="optionbtn">Characters</button> <br>
+                <button onclick="openPets()" id="optionbtn">Pets</button> <br>
+                <button onclick="confirmExit()" id="optionbtn">Exit Game</button>
+            </div>
+        </div>
+        <div id="confirmationDialog" class="dialog">
+            <h2>Confirm Exit</h2>
+            <p>
+                Are you sure you want to exit game?
+            </p>
+            <div class="buttons">
+                <button onclick="cancelExit()" id="cancel-main">Cancel</button>
+                <button onclick="confirmExitsubmain()" id="exit-submain">Exit</button>
+            </div>
+        </div>
+        <script>
+
+            // body back_load
+            // Wait for the page to load
+            function fullscreen() {
+                var consent = confirm("Please hold your device in landscape mode for better gaming experience.");
+                if (consent) {
+                    var elem = document.documentElement;
+                    if (elem.requestFullscreen) {
+                        elem.requestFullscreen();
+                    } else if (elem.mozRequestFullScreen) {
+                        elem.mozRequestFullScreen();
+                    } else if (elem.webkitRequestFullscreen) {
+                        elem.webkitRequestFullscreen();
+                    } else if (elem.msRequestFullscreen) {
+                        elem.msRequestFullscreen();
+                    }
+                    load_content();
+
+                    screen.orientation.lock("landscape-primary");
+                } else {
+                    window.location.href = "https://teju0051.github.io/TGames/Home.html";
+
+                }
+
+            }
+            function load_content() {
+                // Show the content and hide the loader
+                document.getElementById("content").style.display = "block";
+                document.getElementById("loader").style.display = "none";
+
+                // Restore scrollbar visibility
+                document.body.style.overflow = "auto";
+            }
+
+            function openWardrobe() {
+                console.log("Opening Wardrobe...");
+                document.getElementById('wardrobe').style.display = 'block';
+            }
+
+            function openLuckRoyale() {
+                console.log("Opening Luck Royale...");
+                // Add your code to open the Luck Royale
+                // For example, trigger a luck royale event or show luck royale options
+            }
+
+            function openWeapon() {
+                console.log("Opening Weapons section...");
+                // Add your code to open the Weapons section
+                // For example, display weapon selection or load weapon-related content
+            }
+
+            function openCharacter() {
+                console.log("Opening Characters section...");
+                // Add your code to open the Character section
+                // For example, show available characters or allow Character customization
+            }
+            function openPets() {
+                console.log("Opening Pets Section...");
+                // Add your code to open the Pets section
+                // For example, show available Pets or allow pet customization
+            }
+
+
+            // leave game
+            function confirmExit() {
+                var dialog = document.getElementById("confirmationDialog");
+                dialog.style.display = "block";
+                dialog.style.zIndex = "9999";
+            }
+            function confirmExitsubmain() {
+                window.location.href = "https://teju0051.github.io/TGames/Home.html";
+            }
+            function cancelExit() {
+                var dialog = document.getElementById("confirmationDialog");
+                dialog.style.display = "none";
+            }
+
+            document.addEventListener("keydown", function(event) {
+                if (event.key === "Escape") {
+                    confirmExit();
+                }
+            });
+        </script>
+
+        <!-- Wardrobe created here 👇 -->
+        <div class="wardrobe" id="wardrobe">
+            <header class="wardrobeHead">
+                <span>WARDROBE</span>
+                <button id="wardrobeClose" onclick="closeWardrobe()">❌</button>
+            </header>
+            <!--Left panel from here 👇-->
+            <input type="checkbox" id="check" />
+            <label for="check">
+                <b id="leftpaneltoggle">→</b>
+            </label>
+
+            <div class="leftpanel">
+                <button id="leftButton" onclick="openHeadSection()">Headwears</button>
+                <button id="leftButton" onclick="openFaceSection()">Make-up</button>
+                <button id="leftButton" onclick="openTopSection()">Top Wears</button>
+                <button id="leftButton" onclick="openBottomSection()">Bottom Wears</button>
+                <button id="leftButton" onclick="openFootSection()">Footwears</button>
+                <button id="leftButton" onclick="openOutfitSection()">Outfits</button>
+            </div>
+            <div class="contents">
+                <div class="group1">
+                    <div class="product" id="product1">
+                        <img src="Assets/Profileimg.jpg" alt="productimg" id="productimg" />
+                        <footer onclick="purchase()">
+                            1499💎
+                        </footer>
+                    </div>
+                    <div class="product" id="product2">
+                        <img src="Assets/Profileimg.jpg" alt="productimg" id="productimg" />
+                        <footer onclick="purchase()">
+                            1999💎
+                        </footer>
+                    </div>
+                    <div class="product" id="product3">
+                        <img src="Assets/Profileimg.jpg" alt="productimg" id="productimg" />
+                        <footer onclick="purchase()">
+                            599💎
+                        </footer>
+                    </div>
+                </div>
+                <div class="group2">
+                    <div class="product" id="product1">
+                        <img src="Assets/Profileimg.jpg" alt="productimg" id="productimg" />
+                        <footer onclick="purchase()">
+                            1499💎
+                        </footer>
+                    </div>
+                    <div class="product" id="product2">
+                        <img src="Assets/Profileimg.jpg" alt="productimg" id="productimg" />
+                        <footer onclick="purchase()">
+                            1499💎
+                        </footer>
+                    </div>
+                    <div class="product" id="product3">
+                        <img src="Assets/Profileimg.jpg" alt="productimg" id="productimg" />
+                        <footer onclick="purchase()">
+                            1499💎
+                        </footer>
+                    </div>
+                </div>
+                <div class="group3">
+                    <div class="product" id="product1">
+                        <img src="Assets/Profileimg.jpg" alt="productimg" id="productimg" />
+                        <footer onclick="purchase()">
+                            1499💎
+                        </footer>
+                    </div>
+                    <div class="product" id="product2">
+                        <img src="Assets/Profileimg.jpg" alt="productimg" id="productimg" />
+                        <footer onclick="purchase()">
+                            1499💎
+                        </footer>
+                    </div>
+                    <div class="product" id="product3">
+                        <img src="Assets/Profileimg.jpg" alt="productimg" id="productimg" />
+                        <footer onclick="purchase()">
+                            1499💎
+                        </footer>
+                    </div>
+                </div>
+                <div class="group4">
+                    <div class="product" id="product1">
+                        <img src="Assets/Profileimg.jpg" alt="productimg" id="productimg" />
+                        <footer onclick="purchase()">
+                            1499💎
+                        </footer>
+                    </div>
+                    <div class="product" id="product2">
+                        <img src="Assets/Profileimg.jpg" alt="productimg" id="productimg" />
+                        <footer onclick="purchase()">
+                            1499💎
+                        </footer>
+                    </div>
+                    <div class="product" id="product3">
+                        <img src="Assets/Profileimg.jpg" alt="productimg" id="productimg" />
+                        <footer onclick="purchase()">
+                            1499💎
+                        </footer>
+                    </div>
+                </div>
+            </div>
+            <div class="preview" id="preview">
+                <!--Add the character code here-->
+            </div>
+        </div>
+        <!--Wardrode code end-->
+        <!-- Wardrobe open/close function here 👇 -->
+        <script type="text/javascript" charset="utf-8">
+
+            function closeWardrobe() {
+                document.getElementById('wardrobe').style.display = 'none';
+            }
+
+            document.getElementById('product1').addEventListener('click', function() {
+                document.getElementById('preview').style.transition = 'all .5s ease';
+                document.getElementById('preview').style.width = '200px';
+            });
+            document.getElementById('product2').addEventListener('click', function() {
+                document.getElementById('preview').style.transition = 'all .5s ease';
+                document.getElementById('preview').style.width = '200px';
+            });
+            document.getElementById('product3').addEventListener('click', function() {
+                document.getElementById('preview').style.transition = 'all .5s ease';
+                document.getElementById('preview').style.width = '200px';
+            });
+            function openHeadSection() {
+                alert("Sections will be available soon!");
+            }// Make design first and then tell to add here. Huh
+            function openFaceSection() {
+                alert("Sections will be available soon!");
+            }// Make design first and then tell to add here. Huh
+            function openTopSection() {
+                alert("Sections will be available soon!");
+            }// Make design first and then tell to add here. Huh
+            function openBottomSection() {
+                alert("Sections will be available soon!");
+            }// Make design first and then tell to add here. Huh
+            function openFootSection() {
+                alert("Sections will be available soon!");
+            }// Make design first and then tell to add here. Huh
+            function openOutfitSection() {
+                alert("Sections will be available soon!");
+            }// Make design first and then tell to add here. Huh
+        </script>
+
+        <div id="profile-section">
+            <img src="https://i.ibb.co/6NhmGKp/test-png-q-40.png" alt="Profile Picture" class="profile-picture" id="openProfileBtn">
+
+        </div>
+
+        <div class="Profile" id="profile">
+            <header class="profile-head">
+                <img src="https://i.ibb.co/6NhmGKp/test-png-q-40.png" alt="PfP" id="profile-image" />
+                <h2 contenteditable="">T-Games Test</h2><b>UID: 538463</b>
+            </header>
+            <div class="profile-stats">
+                <div class="stats">
+                    <span class="label">WINS</span>
+                    <span class="value">100</span>
+                </div>
+
+                <div class="stats">
+                    <span class="label">KILLS</span>
+                    <span class="value">100</span>
+                </div>
+
+                <div class="stats">
+                    <span class="label">HEADSHOTS</span>
+                    <span class="value">100</span>
+                </div>
+
+                <div class="stats">
+                    <span class="label">MATCHES PLAYED</span>
+                    <span class="value">100</span>
+                </div>
+            </div>
+            <div class="profile-progress">
+                <h5 style="color: White;">Experience</h5>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 70%; background-color: Gold;"></div>
+                </div>
+            </div>
+            <div class="progress-labels">
+                <span class="label">Level 1</span>
+                <span class="label">Level 2</span>
+            </div>
+            <div class="player-bio">
+                <input type="text" id="bioInput" value="I love Battle Royale" placeholder="Your Bio" maxlength="30" />
+                <button id="bioSubmit" type="submit" onclick="saveBio()">Save</button>
+                <button id="bioClose" onclick="closeProfile()">Close</button>
+            </div>
+            <script type="text/javascript" charset="utf-8">
+
+                document.getElementById('openProfileBtn').addEventListener('click', function() {
+                    document.getElementById('profile').style.transition = '.2s ease';
+                    document.getElementById('profile').style.left = '25%';
+                });
+
+                document.getElementById('bioSubmit').addEventListener('click', function() {
+                    var bioInput = document.getElementById('bioInput');
+                    var bioText = bioInput.value.trim().substring(0, 30); // Truncate to maximum 30 characters
+                    // Perform your desired action with the bio text
+                    console.log('Bio:', bioText);
+                });
+
+                function saveBio() {
+                    document.getElementById('profile').style.left = '-60%';
+                    //  Add more to code to let it update to server
+                }
+                function closeProfile() {
+                    document.getElementById('profile').style.left = '-60%';
+                }
+            </script>
+        </div>
+
+        <div>
+            <script type="text/javascript" charset="utf-8">
+                function openTimer() {
+                    document.getElementById('cancel').style.top = '0';
+                    document.getElementById('topPart').style.transition = '.9s ease';
+                    document.getElementById('topPart').style.height = '38%';
+                    document.getElementById('bottomPart').style.transition = '.9s ease';
+                    document.getElementById('bottomPart').style.height = '38%';
+                }
+                function closeTimer() {
+                    document.getElementById('cancel').style.top = '-70px';
+                    document.getElementById('topPart').style.height = '50%';
+                    document.getElementById('bottomPart').style.height = '50%';
+                }
+            </script>
+            <button class="start" onclick="openTimer()"> START
+
+                <div id="startclip" class="color">
+                    <BR>
+
+                        <div id="leftTop" class="corner"></div>
+                        <div id="rightBottom" class="corner"></div>
+                        <div id="rightTop" class="corner"></div>
+                        <div id="leftBottom" class="corner"></div>
+
+                    </div>
+                </button>
+                <button class="cancel" id="cancel" onclick="closeTimer()">
+                    TIMER❌
+                    <div id="case">
+                        <div id="topPart"></div>
+                        <div id="bottomPart"></div>
+                    </div>
+                </button>
+            </div>
+            <script>
+                window.onload = function() {};
+            </script>
+        </div>
+    </body>
+</html>
